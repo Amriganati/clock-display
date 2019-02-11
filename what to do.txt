@@ -1,0 +1,15 @@
+for 24 clock display
+
+clock display - 24 internally 
+display string 12 hours 
+23:45 > 11:45pm
+11:45 > 11:45am
+
+
+for clock display 12 hr - 12 hr internally (0-11)
+
+0value > 12 
+ 
+have both am and pm display
+
+so 11:45pm displays as 11:45pm and 11:45am displays as 11:45am.

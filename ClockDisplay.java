@@ -27,6 +27,7 @@ public class ClockDisplay
         hours = new NumberDisplay(24);
         minutes = new NumberDisplay(60);
         updateDisplay();
+        
     }
 
     /**
@@ -39,6 +40,12 @@ public class ClockDisplay
         hours = new NumberDisplay(24);
         minutes = new NumberDisplay(60);
         setTime(hour, minute);
+        /**
+        
+        if(hours.getValue() >= 13){
+            hours.getValue() = (hours.getValue() - 12);
+        }
+        **/
     }
 
     /**
@@ -78,7 +85,12 @@ public class ClockDisplay
      */
     private void updateDisplay()
     {
+        if(hours.getDisplayValue() >= 13) {
+        
+        }
+        else{
         displayString = hours.getDisplayValue() + ":" + 
                         minutes.getDisplayValue();
+                    }
     }
 }
