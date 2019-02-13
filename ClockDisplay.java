@@ -19,6 +19,7 @@ public class ClockDisplay
     private String displayString;    // simulates the actual display
     private String meridian;
     private int Middleman;
+    private int convertCheck;
     /**
      * Constructor for ClockDisplay objects. This constructor 
      * creates a new clock set at 00:00.
@@ -72,6 +73,7 @@ public class ClockDisplay
         hours.setValue(hour);
         minutes.setValue(minute);
         setMiddleman();
+        convertCheck();
         updateDisplay();
     }
     public int getHour(){
@@ -80,6 +82,7 @@ public class ClockDisplay
     
     private void setMiddleman(){
         Middleman = hours.getValue();
+        convertCheck = Middleman;
         setMeridian();
     }
     
@@ -87,7 +90,7 @@ public class ClockDisplay
      return   Middleman;
     }
     
-    public void setMeridian()
+    private void setMeridian()
     {
         
         if(Middleman > 12)
@@ -103,6 +106,21 @@ public class ClockDisplay
     {
         return meridian;
     }
+    
+    public void convertCheck()
+    {
+        if(convertCheck > 12)
+        {
+            convertCheck = convertCheck - 12;
+        }
+        if(convertCheck == 0)
+        {
+            convertCheck = convertCheck + 1;
+        }
+    }
+    public int getconvertCheck(){
+    return convertCheck;
+    }
     /**
      * Return the current time of this display in the format HH:MM.
      */
@@ -117,7 +135,7 @@ public class ClockDisplay
     private void updateDisplay()
     {
         
-        displayString = hours.getDisplayValue() + ":" + 
+        displayString = convertCheck + ":" + 
                         minutes.getDisplayValue() + meridian;
                 
     }
