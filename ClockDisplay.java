@@ -17,7 +17,8 @@ public class ClockDisplay
     private NumberDisplay hours;
     private NumberDisplay minutes;
     private String displayString;    // simulates the actual display
-    
+    private String meridian;
+    private int Middleman;
     /**
      * Constructor for ClockDisplay objects. This constructor 
      * creates a new clock set at 00:00.
@@ -29,7 +30,8 @@ public class ClockDisplay
         updateDisplay();
         
     }
-
+    
+    
     /**
      * Constructor for ClockDisplay objects. This constructor
      * creates a new clock set at the time specified by the 
@@ -69,9 +71,38 @@ public class ClockDisplay
     {
         hours.setValue(hour);
         minutes.setValue(minute);
+        setMiddleman();
         updateDisplay();
     }
-
+    public int getHour(){
+    return hours.getValue();
+    }
+    
+    private void setMiddleman(){
+        Middleman = hours.getValue();
+        setMeridian();
+    }
+    
+    public int getMiddleman(){
+     return   Middleman;
+    }
+    
+    public void setMeridian()
+    {
+        
+        if(Middleman > 12)
+        {
+            meridian = " PM";
+        }
+        else{
+            meridian = " AM";
+        }
+    }
+    
+    public String getMeridian()
+    {
+        return meridian;
+    }
     /**
      * Return the current time of this display in the format HH:MM.
      */
@@ -85,12 +116,9 @@ public class ClockDisplay
      */
     private void updateDisplay()
     {
-        if(hours.getDisplayValue() >= 13) {
         
-        }
-        else{
         displayString = hours.getDisplayValue() + ":" + 
-                        minutes.getDisplayValue();
-                    }
+                        minutes.getDisplayValue() + meridian;
+                
     }
 }
