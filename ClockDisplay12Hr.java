@@ -30,7 +30,9 @@ public class ClockDisplay12Hr
         minutes = new NumberDisplay(60);
         updateDisplay();
     }
-    
+    /**
+     * Takes middlemans value and divides it by two, if it comes out with a remainder ( != 0) then meridian is set to AM, if it divides cleanly, meridian is set to PM.
+     */
     private void setMeridian()
     {
         if(Middleman % 2 == 0)
@@ -75,7 +77,9 @@ public class ClockDisplay12Hr
         convertCheck();
         updateDisplay();
     }
-    
+    /**
+     * gets meridians current value, not useful outside of debugging 
+     */
     public String getMeridian()
     {
         return meridian;
@@ -95,9 +99,13 @@ public class ClockDisplay12Hr
         convertCheck();
         updateDisplay();
     }
+    /**
+     * gets convertChecks current value, not useful outside of debugging
+     */
     public int getconvertCheck(){
     return convertCheck;
     }
+    
     /**
      * Return the current time of this display in the format HH:MM.
      */
@@ -105,22 +113,30 @@ public class ClockDisplay12Hr
     {
         return displayString;
     }
+    
+    /**
+     * 
+     */
     public void convertCheck()
     {
-        if(convertCheck > 12)
-        {
-            convertCheck = convertCheck - 12;
-        }
         
+        // the clock hits 12pm and rolls over to 00:00 add 12 to the hours field and continue counting
         if(convertCheck == 0)
         {
             convertCheck = convertCheck + 12;
         } 
+        // when the clock ticks from 12:59 to 13, subtract twelve so that clock properly displays 1:00AM/1:00PM
+        if(convertCheck > 12)
+        {
+            convertCheck = convertCheck - 12;
+        }
+        // if convert check == 12 (it's noon or midnight) add one to middleman, which changes the meridian from AM to PM/PM to AM
         if(convertCheck == 12) {
             Middleman = Middleman + 1;
         }
-        setMeridian();
+        setMeridian(); //calls setMeridian again so that meridians display value continues to update relative to the time.
     }
+    
     /**
      * Update the internal string that represents the display.
      */
