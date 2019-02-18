@@ -94,7 +94,7 @@ public class ClockDisplay12Hr
         hours.setValue(hour);
         minutes.setValue(minute);
         convertCheck = hours.getValue();
-        Middleman = 1;
+        Middleman = 1; // sets middleman to one as a starting value
         setMeridian();
         convertCheck();
         updateDisplay();
