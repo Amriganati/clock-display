@@ -17,9 +17,9 @@ public class ClockDisplay
     private NumberDisplay hours;
     private NumberDisplay minutes;
     private String displayString;    // simulates the actual display
-    private String meridian;
-    private int Middleman;
-    private int convertCheck;
+    private String meridian;   // the value that determines whether it's morning or night, adds AM or PM string to the end of displaystrings value depending on the internal hour
+    private int Middleman;    //
+    private int convertCheck; // the value of this integer has it's value set based on the the numerical value for the hours field, it's then used to convert 24 hour time to 12 hour
     /**
      * Constructor for ClockDisplay objects. This constructor 
      * creates a new clock set at 00:00.
@@ -76,20 +76,34 @@ public class ClockDisplay
         convertCheck();
         updateDisplay();
     }
+    
+    /**
+     * Gets the current numerical value for the hours field
+     */
     public int getHour(){
     return hours.getValue();
     }
     
+    /**
+     * assigns middleman a value based on the hour field of the current time. 
+     * Then copies it's value to convertCheck for it to use, and finally ends by calling the set meridian method.
+     */
     private void setMiddleman(){
         Middleman = hours.getValue();
         convertCheck = Middleman;
         setMeridian();
     }
     
+    /**
+     * Gets middlemans current value, not useful outside of debugging
+     */
     public int getMiddleman(){
      return   Middleman;
     }
     
+    /**
+     * Takes middlemans value and decides whether the time is AM or PM based on it's value being above or below 12
+     */
     private void setMeridian()
     {
         
@@ -101,7 +115,9 @@ public class ClockDisplay
             meridian = " AM";
         }
     }
-    
+    /** 
+     * fetches the meridians current value, useful for debugging.
+     */
     public String getMeridian()
     {
         return meridian;
@@ -109,18 +125,29 @@ public class ClockDisplay
     
     public void convertCheck()
     {
+        /**
+         * corrects the 24 hour clock value, by subtracting 12 from any hour field above 12
+         */
         if(convertCheck > 12)
         {
             convertCheck = convertCheck - 12;
         }
+        /**
+         * 
+         */
         if(convertCheck == 0)
         {
             convertCheck = convertCheck + 1;
         }
     }
+    
+    /** 
+     * Gets convert checks current value, not useful outside of debugging
+     */
     public int getconvertCheck(){
     return convertCheck;
     }
+    
     /**
      * Return the current time of this display in the format HH:MM.
      */
